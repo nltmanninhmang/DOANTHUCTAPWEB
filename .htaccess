@@ -1,0 +1,41 @@
+RewriteEngine On
+
+RewriteRule ^$ /index.php [L]
+
+##ADMIN##
+RewriteRule ^admin$ /page/admin/index.php [L]
+RewriteRule ^admin/product$ /page/admin/listProduct.php [L]
+RewriteRule ^admin/product/add$ /page/admin/newProduct.php [L]
+RewriteRule ^admin/product/edit$ /page/admin/editProduct.php [L]
+RewriteRule ^admin/user$ /page/admin/listUser.php [L]
+RewriteRule ^admin/setting$ /page/admin/setting.php [L]
+RewriteRule ^admin/cart/list$ /page/admin/listCart.php [L]
+
+##HANDLE##
+RewriteRule ^api/login$ /handle/login.php [L]
+RewriteRule ^api/register$ /handle/register.php [L]
+RewriteRule ^api/cart$ /handle/cart.php [L]
+RewriteRule ^api/product/add$ /handle/admin/addProduct.php [L]
+RewriteRule ^api/product/edit$ /handle/admin/editProduct.php [L]
+RewriteRule ^api/product/delete$ /handle/admin/deleteProduct.php [L]
+RewriteRule ^api/edituser$ /handle/admin/editUser.php [L]
+RewriteRule ^api/deleteuser$ /handle/admin/deleteUser.php [QSA,L]  
+RewriteRule ^api/setting$ /handle/admin/setting.php [L]
+RewriteRule ^api/checkout$ /handle/checkout.php [L]
+RewriteRule ^api/data$ /handle/admin/dataAdmin.php [L]
+RewriteRule ^api/cartdata$ /handle/admin/listCart.php [L]
+RewriteRule ^api/account$ /handle/accountUpdate.php [L]
+RewriteRule ^api/order$ /handle/dataOrder.php [L]
+
+##ACCOUNT##
+RewriteRule ^auth/login$ /page/login.php [L]
+RewriteRule ^auth/register$ /page/register.php [L]
+RewriteRule ^cart$ /page/cart.php [L]
+RewriteRule ^checkout$ /page/checkout.php [L]
+RewriteRule ^payment$ /page/qrPayment.php [L]
+RewriteRule ^products$ /page/product.php [QSA,L]
+RewriteRule ^account$ /page/accountInfo.php [L]
+RewriteRule ^account/cart$ /page/accountCart.php [L]
+
+##SERVICE##
+RewriteRule ^category/product$ /page/product.php [L]
