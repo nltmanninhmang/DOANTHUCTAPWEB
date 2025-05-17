@@ -136,11 +136,37 @@ include './../include/head.php';
                 return;
             }
 
-            Toast.fire({
-                icon: 'success',
-                title: 'Đang chuyển hướng đến trang thanh toán'
-            }).then(() => {
-                window.location.href = '/checkout';
+            fetch('/api/checklogin', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isLoggedIn) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Đang chuyển hướng đến trang thanh toán'
+                    }).then(() => {
+                        window.location.href = '/checkout';
+                    });
+                } else {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Vui lòng đăng nhập',
+                        text: 'Bạn cần đăng nhập để tiếp tục thanh toán'
+                    }).then(() => {
+                        window.location.href = '/auth/login';
+                    });
+                }
+            })
+            .catch(error => {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Không thể kiểm tra trạng thái đăng nhập'
+                });
             });
         }
 

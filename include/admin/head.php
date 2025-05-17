@@ -1,3 +1,29 @@
+<?php
+session_start();
+include '../../config.php'; 
+
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: /");
+    exit();
+}
+
+try {
+    $user_id = $_SESSION['user_id'];
+    $stmt = $pdo->prepare("SELECT level FROM users WHERE id = :user_id");
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user || $user['level'] != 2) {
+        header("Location: /");
+        exit();
+    }
+} catch (Exception $e) {
+    header("Location: /");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="">
 <head>

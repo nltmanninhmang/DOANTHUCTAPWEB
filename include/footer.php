@@ -66,15 +66,12 @@
     </div>
     <script>
         function openQuickView(productId) {
-            // Tìm sản phẩm trong mảng sản phẩm
             const product = <?php echo json_encode($products); ?>.find(p => p.id == productId);
 
-            // Cập nhật thông tin trong modal
             document.getElementById('quickViewImage').src = product.url_image;
             document.getElementById('quickViewName').innerText = product.name;
             document.getElementById('quickViewPrice').innerText = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price);
 
-            // Hiển thị modal
             const modal = new bootstrap.Modal(document.getElementById('productsQuickView'));
             modal.show();
         }

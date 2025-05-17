@@ -26,6 +26,8 @@ RewriteRule ^api/data$ /handle/admin/dataAdmin.php [L]
 RewriteRule ^api/cartdata$ /handle/admin/listCart.php [L]
 RewriteRule ^api/account$ /handle/accountUpdate.php [L]
 RewriteRule ^api/order$ /handle/dataOrder.php [L]
+RewriteRule ^api/checklogin$ /handle/checklogin.php [L]
+RewriteRule ^api/logout$ /handle/logout.php [L]
 
 ##ACCOUNT##
 RewriteRule ^auth/login$ /page/login.php [L]

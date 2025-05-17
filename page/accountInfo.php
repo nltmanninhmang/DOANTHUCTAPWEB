@@ -79,6 +79,9 @@ if (isset($_SESSION['user_id'])) {
                                 <button type="submit" class="btn btn-primary col-12">Cập nhật</button>
                             </div>
                         </form>
+                        <div class="text-center mt-3">
+                            <button id="logoutButton" class="btn btn-danger col-12">Đăng xuất</button>
+                        </div>
                     </div>
 
                     <!-- Lịch sử đơn hàng -->
@@ -167,7 +170,7 @@ if (isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/meanmenu/2.0.8/jquery.meanmenu.min.js"></script>
 
-    <!-- JavaScript xử lý cập nhật thông tin và modal -->
+    <!-- JavaScript xử lý cập nhật thông tin, modal và đăng xuất -->
     <script>
         $(document).ready(function() {
             // Xử lý form cập nhật thông tin
@@ -200,6 +203,42 @@ if (isset($_SESSION['user_id'])) {
                                 icon: 'error',
                                 title: 'Lỗi',
                                 text: response.message || 'Không thể cập nhật thông tin.'
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Đã xảy ra lỗi khi gửi yêu cầu.'
+                        });
+                    }
+                });
+            });
+
+            // Xử lý nút Đăng xuất
+            $('#logoutButton').on('click', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/api/logout',
+                    method: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Đăng xuất thành công!',
+                                text: 'Bạn sẽ được chuyển hướng đến trang đăng nhập.',
+                                timer: 2000,
+                                timerProgressBar: true
+                            }).then(() => {
+                                window.location.href = '/auth/login';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: response.message || 'Không thể đăng xuất.'
                             });
                         }
                     },
